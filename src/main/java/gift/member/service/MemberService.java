@@ -11,7 +11,7 @@ import gift.member.dto.MemberRegisterRequestDto;
 import gift.member.dto.MemberTokenDto;
 import gift.member.dto.AccessTokenRefreshRequestDto;
 import gift.member.entity.Member;
-import gift.member.repository.MemberRepository;
+import gift.member.repository.MemberRepositoryJpa;
 import gift.token.service.TokenProvider;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -21,10 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepositoryJpa memberRepository;
     private final TokenProvider tokenProvider;
 
-    public MemberService(MemberRepository memberRepository, TokenProvider tokenProvider) {
+    public MemberService(MemberRepositoryJpa memberRepository, TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
         this.tokenProvider = tokenProvider;
     }
