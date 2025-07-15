@@ -6,3 +6,11 @@
 
 1. 위시리스트 레포지토리를 remote add, fetch 한다.
 2. cherry-pick을 통해 위시리스트 레포지토리의 0,1,2,3단계 커밋들을 가져온다.
+
+## 1단계 - 엔티티 매핑
+
+1. JPA 관련 의존성을 추가하고, application.properties에 관련 설정을 추가한다.
+2. ProductRepository 를 JPA 기반으로 교체하고 Service 및 Entity도 수정 소요가 있다면 수정한다.
+3. MemberRepository 에도 동일 작업을 진행한다.
+4. WishlistRepository 에도 동일 작업을 진행하나 외래 키 매핑 등에 유의하여 작업한다.
+5. JDBC의 잔해들을 모두 정리한다.
