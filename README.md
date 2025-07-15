@@ -9,8 +9,11 @@
 
 ## 1단계 - 엔티티 매핑
 
+### 구현할 기능 목록
+
 1. JPA 관련 의존성을 추가하고, application.properties에 관련 설정을 추가한다.
 2. ProductRepository 를 JPA 기반으로 교체하고 Service 및 Entity도 수정 소요가 있다면 수정한다.
 3. MemberRepository 에도 동일 작업을 진행한다.
-4. WishlistRepository 에도 동일 작업을 진행하나 외래 키 매핑 등에 유의하여 작업한다.
-5. JDBC의 잔해들을 모두 정리한다.
+4. RefreshTokenRepository 에도 동일 작업을 진행한다.
+5. WishlistRepository 에도 동일 작업을 진행하나 외래 키 매핑 등에 유의하여 작업한다.
+6. JDBC의 잔해들을 모두 정리한다.
