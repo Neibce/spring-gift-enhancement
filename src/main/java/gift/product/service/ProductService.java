@@ -37,7 +37,7 @@ public class ProductService {
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
         product.update(requestDto);
         productRepository.save(product);
-        return getProductById(id);
+        return new ProductItemDto(getProductById(id));
     }
 
     public void checkRestrictedWords(String name) {
@@ -58,13 +58,8 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductItemDto getProductById(Long id) {
-        return new ProductItemDto(
-                productRepository.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE)));
-    }
-
-    public boolean existsById(Long id) {
-        return productRepository.existsById(id);
+    public Product getProductById(Long id) throws EntityNotFoundException {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
     }
 }
