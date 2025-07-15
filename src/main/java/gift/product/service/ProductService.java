@@ -6,7 +6,7 @@ import gift.product.dto.ProductCreateRequestDto;
 import gift.product.dto.ProductItemDto;
 import gift.product.dto.ProductUpdateRequestDto;
 import gift.product.entity.Product;
-import gift.product.repository.ProductRepository;
+import gift.product.repository.ProductRepositoryJpa;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +16,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private static final String PRODUCT_NOT_FOUND_MESSAGE = "해당 상품을 찾을 수 없습니다.";
-    private final ProductRepository productRepository;
+    private final ProductRepositoryJpa productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepositoryJpa productRepository) {
         this.productRepository = productRepository;
     }
 
     public ProductItemDto createProduct(ProductCreateRequestDto requestDto) {
         checkRestrictedWords(requestDto.name());
 
-        Long newProductId = productRepository.save(requestDto);
-        return new ProductItemDto(new Product(newProductId, requestDto));
+        Product newProduct = productRepository.save(new Product(requestDto));
+        return new ProductItemDto(newProduct);
     }
 
     @Transactional
@@ -36,7 +36,7 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
         product.update(requestDto);
-        productRepository.update(product);
+        productRepository.save(product);
         return getProductById(id);
     }
 
@@ -49,7 +49,7 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         getProductById(id);
-        productRepository.delete(id);
+        productRepository.deleteById(id);
     }
 
     public List<ProductItemDto> getProducts() {
