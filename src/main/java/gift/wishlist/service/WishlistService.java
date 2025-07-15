@@ -7,7 +7,7 @@ import gift.product.service.ProductService;
 import gift.wishlist.dto.WishlistItemResponseDto;
 import gift.wishlist.dto.WishlistUpdateRequestDto;
 import gift.wishlist.entity.WishlistItem;
-import gift.wishlist.repository.WishlistRepositoryJpa;
+import gift.wishlist.repository.WishlistRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class WishlistService {
 
-    private final WishlistRepositoryJpa wishlistRepository;
+    private final WishlistRepository wishlistRepository;
     private final ProductService productService;
 
-    public WishlistService(WishlistRepositoryJpa wishlistRepository,
+    public WishlistService(WishlistRepository wishlistRepository,
             ProductService productService) {
         this.wishlistRepository = wishlistRepository;
         this.productService = productService;

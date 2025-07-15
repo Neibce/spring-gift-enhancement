@@ -3,7 +3,7 @@ package gift.token.service;
 import gift.exception.InvalidCredentialsException;
 import gift.member.entity.Member;
 import gift.token.entity.RefreshToken;
-import gift.token.repository.RefreshTokenRepositoryJpa;
+import gift.token.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -29,9 +29,9 @@ public class TokenProvider {
     private String secretKey;
 
     private static final Duration ACCESS_TOKEN_TTL = Duration.ofMinutes(15);
-    private final RefreshTokenRepositoryJpa refreshTokenRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
-    public TokenProvider(RefreshTokenRepositoryJpa refreshTokenRepository) {
+    public TokenProvider(RefreshTokenRepository refreshTokenRepository) {
         this.refreshTokenRepository = refreshTokenRepository;
     }
 

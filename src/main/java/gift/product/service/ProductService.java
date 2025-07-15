@@ -6,7 +6,7 @@ import gift.product.dto.ProductCreateRequestDto;
 import gift.product.dto.ProductItemDto;
 import gift.product.dto.ProductUpdateRequestDto;
 import gift.product.entity.Product;
-import gift.product.repository.ProductRepositoryJpa;
+import gift.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private static final String PRODUCT_NOT_FOUND_MESSAGE = "해당 상품을 찾을 수 없습니다.";
-    private final ProductRepositoryJpa productRepository;
+    private final ProductRepository productRepository;
 
-    public ProductService(ProductRepositoryJpa productRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

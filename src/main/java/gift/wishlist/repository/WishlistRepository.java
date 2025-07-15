@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WishlistRepositoryJpa extends JpaRepository<WishlistItem, Long> {
+public interface WishlistRepository extends JpaRepository<WishlistItem, Long> {
 
     @EntityGraph(attributePaths = {"product"})
     List<WishlistItem> getWishlistItemsByMemberUuid(UUID memberUuid);
