@@ -4,7 +4,7 @@ import gift.exception.EntityNotFoundException;
 import gift.member.entity.Member;
 import gift.product.entity.Product;
 import gift.product.service.ProductService;
-import gift.wishlist.dto.WishlistItemDto;
+import gift.wishlist.dto.WishlistItemResponseDto;
 import gift.wishlist.dto.WishlistUpdateRequestDto;
 import gift.wishlist.entity.WishlistItem;
 import gift.wishlist.repository.WishlistRepositoryJpa;
@@ -27,7 +27,7 @@ public class WishlistService {
     }
 
     @Transactional
-    public WishlistItemDto upsertWishlistItem(Member member, Long productId,
+    public WishlistItemResponseDto upsertWishlistItem(Member member, Long productId,
             WishlistUpdateRequestDto requestDto) {
         Product product = productService.getProductById(productId);
 
@@ -37,12 +37,12 @@ public class WishlistService {
         wishlistItem.setQuantity(requestDto.quantity());
 
         wishlistRepository.save(wishlistItem);
-        return new WishlistItemDto(wishlistItem);
+        return new WishlistItemResponseDto(wishlistItem);
     }
 
-    public List<WishlistItemDto> getWishlistItems(Member member) {
+    public List<WishlistItemResponseDto> getWishlistItems(Member member) {
         return wishlistRepository.getWishlistItemsByMemberUuid(member.getUuid()).stream()
-                .map(WishlistItemDto::new).collect(Collectors.toList());
+                .map(WishlistItemResponseDto::new).collect(Collectors.toList());
     }
 
     @Transactional
