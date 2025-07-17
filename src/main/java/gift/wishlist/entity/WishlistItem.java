@@ -20,7 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Table(
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"member", "product"})
+                @UniqueConstraint(columnNames = {"member_uuid", "product_id "})
         }
 )
 public class WishlistItem extends BaseEntity {
