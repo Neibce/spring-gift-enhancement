@@ -1,6 +1,9 @@
 package gift.token.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,16 +17,24 @@ public class RefreshToken {
     public static final Duration TTL = Duration.ofDays(365);
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
     @NotBlank
+    @Column(nullable = false, updatable = false, unique = true)
     private String token;
 
     @NotNull
+    @Column(nullable = false, updatable = false)
     private UUID memberUuid;
 
     @NotNull
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @NotNull
+    @Column(nullable = false, updatable = false)
     private LocalDateTime expirationDate;
 
     public RefreshToken() {
