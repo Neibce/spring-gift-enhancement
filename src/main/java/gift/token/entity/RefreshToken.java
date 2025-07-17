@@ -1,5 +1,6 @@
 package gift.token.entity;
 
+import gift.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class RefreshToken {
+public class RefreshToken extends BaseEntity {
 
     private static final Duration TTL = Duration.ofDays(365);
 
@@ -40,14 +41,6 @@ public class RefreshToken {
     public RefreshToken() {
     }
 
-    public RefreshToken(String token, UUID memberUuid, LocalDateTime createdAt,
-            LocalDateTime expirationDate) {
-        this.token = token;
-        this.memberUuid = memberUuid;
-        this.createdAt = createdAt;
-        this.expirationDate = expirationDate;
-    }
-
     public RefreshToken(UUID memberUuid) {
         this.token = UUID.randomUUID().toString().replace("-", "");
         this.memberUuid = memberUuid;
@@ -61,10 +54,6 @@ public class RefreshToken {
 
     public UUID getMemberUuid() {
         return memberUuid;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
     }
 
     public LocalDateTime getExpirationDate() {

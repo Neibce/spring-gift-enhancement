@@ -1,5 +1,6 @@
 package gift.wishlist.entity;
 
+import gift.common.entity.BaseEntity;
 import gift.member.entity.Member;
 import gift.product.entity.Product;
 import jakarta.persistence.Column;
@@ -13,8 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -24,7 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
                 @UniqueConstraint(columnNames = {"member", "product"})
         }
 )
-public class WishlistItem {
+public class WishlistItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +38,6 @@ public class WishlistItem {
     @NotNull
     @Column(nullable = false)
     private Integer quantity;
-
-    @NotNull
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime addedAt;
 
     public WishlistItem() {
 
@@ -65,10 +59,6 @@ public class WishlistItem {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public LocalDateTime getAddedAt() {
-        return addedAt;
     }
 
     public void setQuantity(Integer quantity) {
