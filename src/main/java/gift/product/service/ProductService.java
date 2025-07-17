@@ -36,7 +36,6 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
         product.update(requestDto);
-        productRepository.save(product);
         return new ProductItemDto(getProductById(id));
     }
 
