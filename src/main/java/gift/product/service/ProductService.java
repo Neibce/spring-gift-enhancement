@@ -7,6 +7,8 @@ import gift.product.dto.ProductItemDto;
 import gift.product.dto.ProductUpdateRequestDto;
 import gift.product.entity.Product;
 import gift.product.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +56,10 @@ public class ProductService {
         return productRepository.findAll().stream()
                 .map(ProductItemDto::from)
                 .toList();
+    }
+
+    public Page<ProductItemDto> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable).map(ProductItemDto::from);
     }
 
     public Product getProductById(Long id) throws EntityNotFoundException {
