@@ -27,7 +27,7 @@ public class WishlistItem {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    Product product;
+    private Product product;
 
     @NotNull
     @Column(nullable = false)
