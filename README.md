@@ -17,3 +17,10 @@
 4. RefreshTokenRepository 에도 동일 작업을 진행한다.
 5. WishlistRepository 에도 동일 작업을 진행하나 외래 키 매핑 등에 유의하여 작업한다.
 6. JDBC의 잔해들을 모두 정리한다.
+
+## 2단계 - 페이지네이션
+
+### 구현할 기능 목록
+
+1. WishlistService의 getWishlistItems 메서드에 페이지네이션 기능을 추가한다.
+2. ProductService의 getProducts 메서드에 페이지네이션 기능을 추가한다.
