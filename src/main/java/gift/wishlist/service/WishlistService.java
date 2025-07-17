@@ -42,7 +42,7 @@ public class WishlistService {
 
     public List<WishlistItemResponseDto> getWishlistItems(Member member) {
         return wishlistRepository.getWishlistItemsByMemberUuid(member.getUuid()).stream()
-                .map(WishlistItemResponseDto::from).collect(Collectors.toList());
+                .map(WishlistItemResponseDto::from).toList();
     }
 
     @Transactional
