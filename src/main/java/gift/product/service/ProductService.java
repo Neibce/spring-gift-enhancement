@@ -33,13 +33,12 @@ public class ProductService {
     public ProductItemDto updateProduct(Long id, ProductUpdateRequestDto requestDto) {
         checkRestrictedWords(requestDto.name());
 
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
+        Product product = getProductById(id);
         product.update(requestDto);
-        return new ProductItemDto(getProductById(id));
+        return new ProductItemDto(product);
     }
 
-    public void checkRestrictedWords(String name) {
+    private void checkRestrictedWords(String name) {
         if (name.contains("카카오")) {
             throw new MdApprovalRequiredException("'카카오'가 포함된 문구는 담당 MD와 협의한 경우에만 사용할 수 있습니다.");
         }
@@ -47,7 +46,7 @@ public class ProductService {
 
     @Transactional
     public void deleteProduct(Long id) {
-        getProductById(id);
+        validateProductExists(id);
         productRepository.deleteById(id);
     }
 
@@ -60,5 +59,11 @@ public class ProductService {
     public Product getProductById(Long id) throws EntityNotFoundException {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE));
+    }
+
+    private void validateProductExists(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new EntityNotFoundException(PRODUCT_NOT_FOUND_MESSAGE);
+        }
     }
 }
