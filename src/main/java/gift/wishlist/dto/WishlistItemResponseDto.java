@@ -10,9 +10,14 @@ public record WishlistItemResponseDto(
         LocalDateTime addedAt
 ) {
 
-    public WishlistItemResponseDto(WishlistItem wishlistItem) {
-        this(
-                new ProductItemDto(wishlistItem.getProduct()),
+    public static WishlistItemResponseDto of(ProductItemDto product, int quantity,
+            LocalDateTime addedAt) {
+        return new WishlistItemResponseDto(product, quantity, addedAt);
+    }
+
+    public static WishlistItemResponseDto from(WishlistItem wishlistItem) {
+        return new WishlistItemResponseDto(
+                ProductItemDto.from(wishlistItem.getProduct()),
                 wishlistItem.getQuantity(),
                 wishlistItem.getAddedAt()
         );

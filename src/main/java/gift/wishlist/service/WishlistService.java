@@ -37,12 +37,12 @@ public class WishlistService {
         wishlistItem.setQuantity(requestDto.quantity());
 
         wishlistRepository.save(wishlistItem);
-        return new WishlistItemResponseDto(wishlistItem);
+        return WishlistItemResponseDto.from(wishlistItem);
     }
 
     public List<WishlistItemResponseDto> getWishlistItems(Member member) {
         return wishlistRepository.getWishlistItemsByMemberUuid(member.getUuid()).stream()
-                .map(WishlistItemResponseDto::new).collect(Collectors.toList());
+                .map(WishlistItemResponseDto::from).collect(Collectors.toList());
     }
 
     @Transactional

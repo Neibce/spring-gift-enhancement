@@ -48,7 +48,7 @@ public class ProductController {
 
     @GetMapping("{id}")
     public ResponseEntity<ProductItemDto> getProduct(@PathVariable Long id) {
-        var product = new ProductItemDto(productService.getProductById(id));
+        var product = ProductItemDto.from(productService.getProductById(id));
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 }

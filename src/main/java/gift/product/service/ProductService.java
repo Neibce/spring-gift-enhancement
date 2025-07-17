@@ -26,7 +26,7 @@ public class ProductService {
         checkRestrictedWords(requestDto.name());
 
         Product newProduct = productRepository.save(new Product(requestDto));
-        return new ProductItemDto(newProduct);
+        return ProductItemDto.from(newProduct);
     }
 
     @Transactional
@@ -35,7 +35,7 @@ public class ProductService {
 
         Product product = getProductById(id);
         product.update(requestDto);
-        return new ProductItemDto(product);
+        return ProductItemDto.from(product);
     }
 
     private void checkRestrictedWords(String name) {
@@ -52,7 +52,7 @@ public class ProductService {
 
     public List<ProductItemDto> getProducts() {
         return productRepository.findAll().stream()
-                .map(ProductItemDto::new)
+                .map(ProductItemDto::from)
                 .toList();
     }
 
