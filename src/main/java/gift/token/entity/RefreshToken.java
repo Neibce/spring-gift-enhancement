@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 public class RefreshToken {
 
-    public static final Duration TTL = Duration.ofDays(365);
+    private static final Duration TTL = Duration.ofDays(365);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
