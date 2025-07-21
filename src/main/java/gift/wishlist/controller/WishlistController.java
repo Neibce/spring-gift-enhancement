@@ -2,13 +2,13 @@ package gift.wishlist.controller;
 
 import gift.annotation.LoginMember;
 import gift.common.dto.PageRequestDto;
+import gift.common.dto.PageResponseDto;
 import gift.member.entity.Member;
 import gift.wishlist.enums.WishlistItemSortField;
 import gift.wishlist.dto.WishlistItemResponseDto;
 import gift.wishlist.dto.WishlistUpdateRequestDto;
 import gift.wishlist.service.WishlistService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +32,12 @@ public class WishlistController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<WishlistItemResponseDto>> getWishlistItems(
+    public ResponseEntity<PageResponseDto<WishlistItemResponseDto>> getWishlistItems(
             @LoginMember Member member, @Valid @ModelAttribute PageRequestDto pageRequestDto) {
         Pageable pageable = pageRequestDto.toSafePageable(
                 WishlistItemSortField.class, WishlistItemSortField.CREATED_AT);
-        var wishlistItems = wishlistService.getWishlistItems(member, pageable);
-        return ResponseEntity.ok(wishlistItems);
+        var pageResponseDto = wishlistService.getWishlistItems(member, pageable);
+        return ResponseEntity.ok(pageResponseDto);
     }
 
     @PutMapping("/products/{productId}")
