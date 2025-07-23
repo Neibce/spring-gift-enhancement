@@ -24,3 +24,13 @@
 
 1. WishlistService의 getWishlistItems 메서드에 페이지네이션 기능을 추가한다.
 2. ProductService의 getProducts 메서드에 페이지네이션 기능을 추가한다.
+
+
+## 3단계 - 상품 옵션
+
+### 구현할 기능 목록
+
+1. 연관 관계 및 Validation에 유의하며 Option 엔티티를 작성한다.
+2. OptionRepository를 작성한다.
+3. OptionService를 작성한다.
+4. OptionController를 작성한다.
